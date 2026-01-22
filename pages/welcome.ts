@@ -17,15 +17,15 @@ export class WelcomePage extends Common {
 
    async createYourOwn() {
     const ownyourburger= this.page.getByRole("heading", { name: "CREATE YOUR OWN" });
-    await ownyourburger.waitFor({ state: "visible", timeout: 8000 });
+    await expect(ownyourburger).toBeVisible(); 
 }
    async startAnOrder() {
     const startOrderButton = this.page.getByRole("link", { name: "Start an Order" });
-    const findLocation= this.page.getByRole("heading", { name: "Find a Location" });
-
     await this.waitUntilVisibleAndClick(startOrderButton);
-    await findLocation.waitFor({ state: "visible", timeout: 8000 });
 
 
+    // Wait until the next screen is actually loaded
+    await expect(this.page.getByRole("heading", { name: "Find a Location" }))
+      .toBeVisible({ timeout: 5000 });
   }
 }
