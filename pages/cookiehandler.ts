@@ -12,7 +12,7 @@ export async function handleCookiesAndCloseAlert(page: Page) {
 
     // Small alert handling
     const closeAlertBtn = frame.getByRole("button", { name: "Close" });
-    if (await closeAlertBtn.isVisible({ timeout: 8000 }).catch(() => false)) {
+    if (await closeAlertBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
       await closeAlertBtn.click();
     }
   }

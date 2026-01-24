@@ -9,11 +9,12 @@ export class Common {
   constructor(page: Page) {
     this.page = page;
   }
-  async waitUntilVisibleAndClick(locator: Locator,timeout = 8000) {
+  async waitUntilVisibleAndClick(locator: Locator,timeout = 5000) {
   await locator.waitFor({ state: "visible", timeout });
   await locator.click();
 }
-  async fill(locator: Locator, value: string, timeout = 8000) {
+
+  async fill(locator: Locator, value: string, timeout = 5000) {
   await locator.waitFor({ state: "visible", timeout });
   await locator.fill(value);
   }

@@ -7,16 +7,16 @@ export class PickUp extends Common {
     super(page);}
 
 async pickUpLocation() {
-  await expect(this.page.getByRole("heading", { name: "Find a Location" })).toBeVisible();
-  const zip = testData.zipCode;
   const input = this.page.locator("#LocationOrZipCode");
+  await expect(input).toBeVisible({ timeout: 3000 });
+  const zip = testData.zipCode;
   await input.fill(zip);
 
   // Pick the dropdown option that contains the zip
   //await this.page.getByRole("heading", { name: "Find a Location" }).click();
     const firstOption = this.page.locator('[role="option"]').first();
 
-    await expect(firstOption).toBeVisible({ timeout: 10000 });
+    await expect(firstOption).toBeVisible({ timeout: 3000 });
     await firstOption.click();
 
   // Click the actual Search *button* (not text)
