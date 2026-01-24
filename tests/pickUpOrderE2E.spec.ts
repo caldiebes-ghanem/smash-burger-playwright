@@ -7,7 +7,7 @@ import { Checkout } from '../pages/checkout';
 
 import { testData, userData, paymentData, generateEmail } from "../utils/testData";
 
-test('Create Your own', async ({ page }) => {
+test('Create Your own - Succeful Checkout ', async ({ page }) => {
   test.setTimeout(60000);
   const welcomePage = new WelcomePage(page);
   const pickUp = new PickUp(page);

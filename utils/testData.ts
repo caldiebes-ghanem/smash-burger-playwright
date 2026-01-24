@@ -14,7 +14,8 @@ export const userData ={
   lastName : "Ghanem",
   //email: "RandomEmail04@gmail.com", 
   phoneNumber : "(561) 438-3756", 
-  password : "Secretp@$$w0rd"
+  password : "Secretp@$$w0rd", 
+  wrongPassword : "WrongP@$$w0rd"
 
   };
 
