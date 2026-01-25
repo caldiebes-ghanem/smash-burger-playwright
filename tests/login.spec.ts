@@ -1,7 +1,7 @@
 import { test } from "../utils/fixtures"; // adjust path if needed
 import { WelcomePage } from "../pages/welcome";
 import { Checkout } from "../pages/checkout";
-import { userData } from "../utils/testData";
+import { userData,testData } from "../utils/testData";
 
 
 test("Sign in using right mail and right password to see the welcome page", async ({ page, account }) => {
