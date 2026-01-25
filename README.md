@@ -2,9 +2,8 @@
 End-to-end test automation for the Smash Burger site using Playwright and TypeScript.
 
 ## Prerequisites
-- Node.js (16+ recommended)
-- npm (comes with Node.js)
-- Git (optional, for cloning the repo)
+- Node.js (16+)
+- npm
 
 ## Install
 1. Install dependencies:
