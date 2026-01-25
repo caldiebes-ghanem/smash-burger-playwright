@@ -6,7 +6,10 @@ export const testData = {
   cheese : "American", 
   extracheese : "Aged Cheddar",
   topping : "Tomatoes", 
-  sauce : "Ketchup"
+  sauce : "Ketchup", 
+  price : 4.99,
+  BagFee: 0.10, 
+  Tax: 0.72
 };
 
 export const userData ={

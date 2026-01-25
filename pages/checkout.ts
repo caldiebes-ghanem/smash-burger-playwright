@@ -47,4 +47,10 @@ async summaryValidation(){
     const summaryOrder = this.page.getByRole("button", { name: "Order Summary" });
     await summaryOrder.click();
     }
+
+async checkoutQteIs(qte : number){
+   const quantity = this.page.getByRole('cell', { name: String(qte) });
+   await expect(quantity).toBeVisible({ timeout: 2000 });
+
+    }
 }

@@ -8,20 +8,27 @@ export class PickUp extends Common {
 
 async pickUpLocation() {
   const input = this.page.locator("#LocationOrZipCode");
-  await expect(input).toBeVisible({ timeout: 3000 });
-  const zip = testData.zipCode;
-  await input.fill(zip);
+await input.waitFor({ state: 'attached' });
+await expect(input).toBeVisible();
+await input.click();
+await input.fill(testData.zipCode);
+await expect(input).toHaveValue(testData.zipCode);
 
   // Pick the dropdown option that contains the zip
   //await this.page.getByRole("heading", { name: "Find a Location" }).click();
     const firstOption = this.page.locator('[role="option"]').first();
-
-    await expect(firstOption).toBeVisible({ timeout: 3000 });
-    await firstOption.click();
+    try {
+      await expect(firstOption).toBeVisible({ timeout: 3000 });
+      await firstOption.click();
+    } catch {
+      const comboButton = this.page.locator('button[aria-haspopup="listbox"]').nth(1);
+      await comboButton.click();
+      await firstOption.click();
+    }
 
   // Click the actual Search *button* (not text)
   const searchButton = this.page.locator('button[type="submit"]', { hasText: "Search" });
-  await searchButton.click({force : true});
+  await searchButton.click();
   
   // Optional: wait for results indicator (replace with your real results locator)
   // await expect(this.page.getByText("Results")).toBeVisible();

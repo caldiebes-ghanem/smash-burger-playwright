@@ -4,14 +4,11 @@ import { Checkout } from "../pages/checkout";
 import { userData } from "../utils/testData";
 
 
-test("Sign in using right password and account", async ({ page, account }) => {
+test("Sign in using right mail and right password to see the welcome page", async ({ page, account }) => {
   test.info().annotations.push(
     { type: "Pre-condition", description: "no one is connected" },
     { type: "Expected Result", description: "successful sign in and log out" }
   );
-
-  test.setTimeout(60000);
-
   const welcomePage = new WelcomePage(page);
   const checkout = new Checkout(page);
 
@@ -25,14 +22,11 @@ test("Sign in using right password and account", async ({ page, account }) => {
 
 });
 
-test("Sign in using right mail wrong password to see error message", async ({ page, account }) => {
+test("Sign in using right mail but wrong password to see error message", async ({ page, account }) => {
   test.info().annotations.push(
     { type: "Pre-condition", description: "no one is connected" },
     { type: "Expected Result", description: "failure of signing in" }
   );
-
-  test.setTimeout(60000);
-
   const welcomePage = new WelcomePage(page);
   const checkout = new Checkout(page);
 
