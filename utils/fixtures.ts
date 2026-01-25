@@ -1,7 +1,7 @@
 import { test as base } from "@playwright/test";
 import { WelcomePage } from "../pages/welcome";
 import { Checkout } from "../pages/checkout";
-import { userData, generateEmail } from "../utils/testData";
+import { userData, generateEmail,testData } from "../utils/testData";
 
 type Account = {
   email: string;
