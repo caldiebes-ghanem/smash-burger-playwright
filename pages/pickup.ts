@@ -8,11 +8,11 @@ export class PickUp extends Common {
 
 async pickUpLocation() {
   const input = this.page.locator("#LocationOrZipCode");
-await input.waitFor({ state: 'attached' });
-await expect(input).toBeVisible();
-await input.click();
-await input.fill(testData.zipCode);
-await expect(input).toHaveValue(testData.zipCode);
+  await input.waitFor({ state: 'attached' });
+  await expect(input).toBeVisible();
+  await input.click();
+  await input.fill(testData.zipCode);
+  await expect(input).toHaveValue(testData.zipCode);
 
   // Pick the dropdown option that contains the zip
   //await this.page.getByRole("heading", { name: "Find a Location" }).click();
@@ -23,15 +23,12 @@ await expect(input).toHaveValue(testData.zipCode);
     } catch {
       const comboButton = this.page.locator('button[aria-haspopup="listbox"]').nth(1);
       await comboButton.click();
+      await expect(comboButton).toBeVisible({ timeout: 1000 });
       await firstOption.click();
     }
 
-  // Click the actual Search *button* (not text)
   const searchButton = this.page.locator('button[type="submit"]', { hasText: "Search" });
   await searchButton.click();
-  
-  // Optional: wait for results indicator (replace with your real results locator)
-  // await expect(this.page.getByText("Results")).toBeVisible();
 }
  
    async chosinglocation() {

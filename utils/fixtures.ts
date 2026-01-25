@@ -36,7 +36,6 @@ export const test = base.extend<{}, WorkerFixtures>({
       await checkout.fillContactForm("Password", password);
 
       await welcomePage.submitCreateAccount();
-      await welcomePage.logOut();
 
       await page.close();
 

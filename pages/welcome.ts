@@ -54,15 +54,7 @@ export class WelcomePage extends Common {
     const accountPage = this.page.getByRole("heading", { name: "My Account" }).describe("My account heading in the page of account information");
     await expect(accountPage).toBeVisible({ timeout: 10000 });
 }
-  async logOut(){
-    const logOutButton = this.page.getByRole("button", { name: "Log Out" }).describe("logging out locator");
-    await logOutButton.scrollIntoViewIfNeeded();
-    logOutButton.click(); 
 
-    const signInPage = this.page.getByRole("heading", { name: "Sign In" }).describe("sign in heading in the page of connexion");
-    await expect(signInPage).toBeVisible({ timeout: 5000 });
-
-    }
 
   async submitSignIn(){
   const signInSubmit = this.page.getByRole("button", { name: "Sign In" }).describe("sign in button to submit the log in form");
