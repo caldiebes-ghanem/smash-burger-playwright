@@ -21,7 +21,7 @@ test('Place pickup order with “Create Your Own” burger + validate details ac
   const checkout = new Checkout(page);
 
   
-  await welcomePage.open();
+  await welcomePage.open(testData.urlCYO);
   await welcomePage.createYourOwn();
   await welcomePage.startAnOrder();
   await pickUp.pickUpLocation(); 

@@ -11,6 +11,7 @@ async pickUpLocation() {
   await input.waitFor({ state: 'attached' });
   await expect(input).toBeVisible();
   await input.click();
+  await input.fill('');                // clear
   await input.fill(testData.zipCode);
   await expect(input).toHaveValue(testData.zipCode);
 
@@ -26,13 +27,18 @@ async pickUpLocation() {
       await expect(comboButton).toBeVisible({ timeout: 1000 });
       await firstOption.click();
     }
-
   const searchButton = this.page.locator('button[type="submit"]', { hasText: "Search" });
   await searchButton.click();
 }
  
-   async chosinglocation() {
-      
+async accesLocation(){
+   const accessLoc = this.page.getByRole("link", { name: "Choose a location to order" }).describe("accessing chosing location in welcome page");
+   await expect(accessLoc).toBeVisible({ timeout: 10000 });
+   accessLoc.click(); 
+}
+
+    
+async chosinglocation() {
       const location = testData.location;
       const secondStartOrder = this.page.locator('(//button[text()="Start Order"])[2]');
       await secondStartOrder.click();

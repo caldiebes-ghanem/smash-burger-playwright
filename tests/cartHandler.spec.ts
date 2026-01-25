@@ -1,9 +1,4 @@
 import { test } from '@playwright/test';
-import { WelcomePage } from '../pages/welcome';
-import { PickUp } from '../pages/pickup';
-import { BurgerBuilder } from '../pages/burgerbuilder';
-import { Cart } from '../pages/cart';
-import { Checkout } from '../pages/checkout';
 import { testData} from "../utils/testData";
 import { setupToBurgerBuilder } from '../utils/orderFlow';
 

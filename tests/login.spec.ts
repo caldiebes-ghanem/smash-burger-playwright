@@ -12,7 +12,7 @@ test("Sign in using right mail and right password to see the welcome page", asyn
   const welcomePage = new WelcomePage(page);
   const checkout = new Checkout(page);
 
-  await welcomePage.open();
+  await welcomePage.open(testData.urlCYO);
   await welcomePage.signIn();
   await checkout.fillContactForm("Email Address", account.email);
   await checkout.fillContactForm("Password", account.password);
@@ -30,7 +30,7 @@ test("Sign in using right mail but wrong password to see error message", async (
   const welcomePage = new WelcomePage(page);
   const checkout = new Checkout(page);
 
-  await welcomePage.open();
+  await welcomePage.open(testData.urlCYO);
   await welcomePage.signIn();
   await checkout.fillContactForm("Email Address", account.email);
   await checkout.fillContactForm("Password", userData.wrongPassword);

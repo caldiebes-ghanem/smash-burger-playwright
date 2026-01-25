@@ -10,10 +10,11 @@ export class WelcomePage extends Common {
   constructor(page: Page) {
     super(page);}
 
-  async open() {
-    await this.page.goto('https://dev.smashburger.com/menu/smashburgers/create-your-own');
+  async open(url:string) {
+    await this.page.goto(url);
     await handleCookiesAndCloseAlert(this.page);
-    
+    await this.page.waitForTimeout(3000);
+
   }
 
    async createYourOwn() {
@@ -23,7 +24,7 @@ export class WelcomePage extends Common {
    async startAnOrder() {
     await this.page.waitForLoadState("domcontentloaded");
     const startOrderButton = this.page.getByRole("link", { name: "Start an Order" });
-    await this.page.waitForTimeout(3000);
+    //await this.page.waitForTimeout(3000);
     //await expect(startOrderButton).toBeVisible({ timeout: 15000 });
     await startOrderButton.click();
   }

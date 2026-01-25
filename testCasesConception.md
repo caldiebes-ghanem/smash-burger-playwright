@@ -1,8 +1,9 @@
-# TC1 — Sign in  log out
+# TC1 — Sign in  log out // in  fixture so the generated email can be re-used in login and other TCs 
 
-# TC2 — log in in  
+# TC2 — log in in  with right credentials
+# TC3 — log in in  with wrong credentials
 
-# TC3 — Place pickup order with “Create Your Own” burger + validate details across pages
+# TC4 — Place pickup order with “Create Your Own” burger + validate details across pages
 Preconditions
     connect as a guest 
     use zip code 80246
@@ -30,7 +31,7 @@ Steps
 Expected result
     The standard item and its modifications are identical across Cart → Checkout → Order Details, including product information.
 
-# TC4 Update quantity in cart (increase/decrease) + verify totals recalc correctly through checkout and confirmation
+# TC5/TC6/TC7 Update quantity in cart (increase/decrease) + verify totals recalc correctly through checkout and confirmation
 
 Prerequisites
     Location selected (ZIP 80246 → first store)
@@ -57,7 +58,7 @@ Steps
 Expected result
     Quantity changes are persisted and totals are recalculated correctly across Cart → Checkout → Order Details.
 
-# TC5 — Remove an item from cart + validate empty cart and checkout is blocked/handled correctly
+# TC8 — Remove an item from cart + validate empty cart and checkout is blocked/handled correctly
 
 Prerequisites
     Location selected (ZIP 80246 → first store)

@@ -14,7 +14,7 @@ export async function setupToBurgerBuilder(page: any) {
   const welcomePage = new WelcomePage(page);
   const pickUp = new PickUp(page);
 
-  await welcomePage.open();
+  await welcomePage.open(testData.urlCYO);
   await welcomePage.createYourOwn();
   await welcomePage.startAnOrder();
   await pickUp.pickUpLocation();

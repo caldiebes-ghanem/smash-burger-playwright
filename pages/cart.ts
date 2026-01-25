@@ -63,4 +63,40 @@ async displayCartEmptyMsg(){
   const displayMsg = this.page.getByRole('heading', { name: 'Your Cart is Empty' });
   await expect(displayMsg).toBeVisible({ timeout: 5000 });
   }
+
+async mockImages() {
+  const placeholderToken = "placeholder.e96474ea.jpg";
+  const injectedImages = [
+    "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400",
+    "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+  ];
+  let i = 0;
+
+  await this.page.route(`**/*${placeholderToken}*`, async (route) => {
+    console.log("✅ Intercepted placeholder:", route.request().url());
+
+    const newUrl = injectedImages[i++ % injectedImages.length];
+    const imgResponse = await route.fetch({ url: newUrl });
+
+    await route.fulfill({ response: imgResponse });
+  });
+}
+
+
+async synchronisation() {
+    await this.page.reload();
+    await this.page.waitForTimeout(3000);
+   }
+
+async displayCart() {
+  const cartDisplaying = this.page.getByRole('heading', { name: 'Cart' });
+  await expect(cartDisplaying).toBeVisible({ timeout: 5000 });
+
+  }
+async validateImagesReplaced() {
+  const placeholders = this.page.locator("img");
+   await expect.poll(async () => await placeholders.count(), { timeout: 10000 }).toBeGreaterThanOrEqual(2);
+}
+
+
 }

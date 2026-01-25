@@ -27,6 +27,7 @@ export class Checkout extends Common {
  async paymentFormValidation(id:string , value:string){
     const frame = this.page.frameLocator('#hpc--card-frame');
     const input = frame.getByLabel(id);
+    await expect(input).toBeVisible({ timeout: 10000 });
     await input.click();
     await input.fill(value);
 }

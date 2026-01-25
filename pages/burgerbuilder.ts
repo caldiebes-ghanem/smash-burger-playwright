@@ -43,4 +43,8 @@ export class BurgerBuilder extends Common {
 
     }
 
+  async returnToMenu(){
+    const returnToMenu = this.page.getByRole("link", { name: "Return to menu"});
+    await returnToMenu.click();
+    }
 }

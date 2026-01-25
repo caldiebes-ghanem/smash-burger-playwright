@@ -25,7 +25,7 @@ export const test = base.extend<{}, WorkerFixtures>({
       const welcomePage = new WelcomePage(page);
       const checkout = new Checkout(page);
 
-      await welcomePage.open();
+      await welcomePage.open(testData.urlCYO);
       await welcomePage.signIn();
       await welcomePage.createAccount();
 
