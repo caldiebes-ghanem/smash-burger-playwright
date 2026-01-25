@@ -7,12 +7,12 @@ export class Cart extends Common {
   }
 
   async validateProductInfo(product:string){
-    const option = this.page.locator("li").filter({ hasText: product }).first();
+    const option = this.page.locator("li").filter({ hasText: product }).first().describe(`product:"${product}"`);
     await expect(option).toBeVisible();
 }
 
 async addquantity(qte : number){
-  const increase = this.page.getByRole('button', { name: 'Increase' });
+  const increase = this.page.getByRole('button', { name: 'Increase' }).describe(`button increasing qte to:"${qte}"`);
   const quantity = this.page.locator('#quantity');
 
   for (let i = 0; i < qte - 1; i++) {
@@ -23,7 +23,7 @@ async addquantity(qte : number){
 }
 
 async decreasequantity(qte : number){
-  const decrease = this.page.getByRole('button', { name: 'Decrease' });
+  const decrease = this.page.getByRole('button', { name: 'Decrease' }).describe(`button deacreasing qte to:"${qte}"`);
   const quantity = this.page.locator('#quantity');
 
   for (let i = 0; i < qte - 1; i++) {
@@ -34,20 +34,20 @@ async decreasequantity(qte : number){
 }
 
 async qteShouldBe (qte : number){
-  const quantity = this.page.locator('input[type="number"]').first();
+  const quantity = this.page.locator('input[type="number"]').first().describe(`the qte assigned "${qte}"`);
   await expect(quantity).toHaveValue(String(qte)); 
   }
 
 async priceShouldBe(qte : number , price: number){
   const expectedTotal = qte * price;
-  const actualTotalText = await this.page.locator('//td/span').first().innerText(); // "$9.98"
-  const actualTotal = Number(actualTotalText.replace(/[^0-9.]/g, '')); // keeps digits + dot only
+  const actualTotalText = await this.page.locator('//td/span').first().describe(`the total showed in the app`).innerText(); 
+  const actualTotal = Number(actualTotalText.replace(/[^0-9.]/g, ''));
   expect(actualTotal).toBeCloseTo(expectedTotal, 2);
   }
 
 async totalShouldBe(qte:number, price: number, bagFee:number, tax:number){
   const expectedTotal = (qte * price) + bagFee + tax;
-  const totalDD = this.page.locator('//dt[normalize-space()="Total"]/following-sibling::dd[1]');
+  const totalDD = this.page.locator('//dt[normalize-space()="Total"]/following-sibling::dd[1]').describe(`the total showed in the app`);
   await expect(totalDD).not.toHaveText(/Updating/i);
 
   const actualTotalText = await totalDD.innerText();
@@ -56,11 +56,11 @@ async totalShouldBe(qte:number, price: number, bagFee:number, tax:number){
 }
 
 async removeItem(){
-  const removeButton= this.page.getByRole('button', { name: 'Remove CREATE YOUR OWN' });
+  const removeButton= this.page.getByRole('button', { name: 'Remove CREATE YOUR OWN' }).describe(`the button to remove item`);
   removeButton.click(); 
 }
 async displayCartEmptyMsg(){
-  const displayMsg = this.page.getByRole('heading', { name: 'Your Cart is Empty' });
+  const displayMsg = this.page.getByRole('heading', { name: 'Your Cart is Empty' }).describe(`the heading to an empty cart`);
   await expect(displayMsg).toBeVisible({ timeout: 5000 });
   }
 
@@ -73,8 +73,6 @@ async mockImages() {
   let i = 0;
 
   await this.page.route(`**/*${placeholderToken}*`, async (route) => {
-    console.log("✅ Intercepted placeholder:", route.request().url());
-
     const newUrl = injectedImages[i++ % injectedImages.length];
     const imgResponse = await route.fetch({ url: newUrl });
 
@@ -89,7 +87,7 @@ async synchronisation() {
    }
 
 async displayCart() {
-  const cartDisplaying = this.page.getByRole('heading', { name: 'Cart' });
+  const cartDisplaying = this.page.getByRole('heading', { name: 'Cart' }).describe(`the heading of the cart`);
   await expect(cartDisplaying).toBeVisible({ timeout: 5000 });
 
   }

@@ -8,15 +8,15 @@ export class BurgerBuilder extends Common {
 
 
   async selectRadio(Radio: string) {
-      const label = this.page.locator("label").filter({ hasText: Radio }).first();
+      const label = this.page.locator("label").filter({ hasText: Radio }).first().describe(`radio option "${Radio}"`);
       await expect(label).toBeVisible({ timeout: 2000 });
-      const radio = label.locator('input[type="radio"]').describe(`Select radio option "${Radio}"`);
+      const radio = label.locator('input[type="radio"]').describe(`radio option "${Radio}"`);
       await radio.check();
       await expect(radio).toBeChecked();
   }
 
   async selectExtra(extra : string){
-    const option = this.page.locator("label").filter({ has: this.page.getByText(extra, { exact: true }) }).first().describe(`Select extra modifiers option "${extra}"`);
+    const option = this.page.locator("label").filter({ has: this.page.getByText(extra, { exact: true }) }).first().describe(`extra modifiers option "${extra}"`);
     await expect(option).toBeVisible({ timeout: 2000 });
     await option.click();
   }

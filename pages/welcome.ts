@@ -18,12 +18,12 @@ export class WelcomePage extends Common {
   }
 
    async createYourOwn() {
-    const ownyourburger= this.page.getByRole("heading", { name: "CREATE YOUR OWN" });
+    const ownyourburger= this.page.getByRole("heading", { name: "CREATE YOUR OWN" }).describe(`create your own burger welcoming`);
     await ownyourburger.waitFor({ state: "visible", timeout: 5000 }); 
 }
    async startAnOrder() {
     await this.page.waitForLoadState("domcontentloaded");
-    const startOrderButton = this.page.getByRole("link", { name: "Start an Order" });
+    const startOrderButton = this.page.getByRole("link", { name: "Start an Order" }).describe(`Start an Order`);
     //await this.page.waitForTimeout(3000);
     //await expect(startOrderButton).toBeVisible({ timeout: 15000 });
     await startOrderButton.click();
@@ -65,7 +65,7 @@ export class WelcomePage extends Common {
 
   async displayErrorMessage(msg : string){
     
-    const alert = this.page.getByRole('alert').filter({ hasText: msg});
+    const alert = this.page.getByRole('alert').filter({ hasText: msg}).describe(`error message: "${msg}"`);
     await expect(alert).toBeVisible({ timeout: 5000 });
     }
 }

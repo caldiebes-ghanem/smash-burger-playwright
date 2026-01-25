@@ -7,7 +7,7 @@ export class PickUp extends Common {
     super(page);}
 
 async pickUpLocation() {
-  const input = this.page.locator("#LocationOrZipCode");
+  const input = this.page.locator("#LocationOrZipCode").describe(`field to assign location`);
   await input.waitFor({ state: 'attached' });
   await expect(input).toBeVisible();
   await input.click();
@@ -17,17 +17,17 @@ async pickUpLocation() {
 
   // Pick the dropdown option that contains the zip
   //await this.page.getByRole("heading", { name: "Find a Location" }).click();
-    const firstOption = this.page.locator('[role="option"]').first();
+    const firstOption = this.page.locator('[role="option"]').first().describe(`location option`);
     try {
       await expect(firstOption).toBeVisible({ timeout: 3000 });
       await firstOption.click();
     } catch {
-      const comboButton = this.page.locator('button[aria-haspopup="listbox"]').nth(1);
+      const comboButton = this.page.locator('button[aria-haspopup="listbox"]').nth(1).describe(`location list`);
       await comboButton.click();
       await expect(comboButton).toBeVisible({ timeout: 1000 });
       await firstOption.click();
     }
-  const searchButton = this.page.locator('button[type="submit"]', { hasText: "Search" });
+  const searchButton = this.page.locator('button[type="submit"]', { hasText: "Search" }).describe(`search of location`);
   await searchButton.click();
 }
  
@@ -40,6 +40,6 @@ async accesLocation(){
     
 async chosinglocation() {
       const location = testData.location;
-      const secondStartOrder = this.page.locator('(//button[text()="Start Order"])[2]');
+      const secondStartOrder = this.page.locator('(//button[text()="Start Order"])[2]').describe(`confirm location to order from`);
       await secondStartOrder.click();
     }}
