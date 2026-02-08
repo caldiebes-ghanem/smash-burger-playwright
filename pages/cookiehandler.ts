@@ -7,12 +7,12 @@ export async function handleCookiesAndCloseAlert(page: Page) {
   const acceptAllBtn = frame.getByRole("button", { name: "Accept all" }).describe(`button to accept all cookies`);
 
   // Only run if cookie button is visible
-  if (await acceptAllBtn.isVisible().catch(() => false)) {
+  if (await acceptAllBtn.isVisible({ timeout: 10000 }).catch(() => false)) {
     await acceptAllBtn.click();
 
     // Small alert handling
     const closeAlertBtn = frame.getByRole("button", { name: "Close" }).describe(`button to close an alert`);
-    if (await closeAlertBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+    if (await closeAlertBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
       await closeAlertBtn.click();
     }
   }
