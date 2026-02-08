@@ -2,7 +2,7 @@
 //based on the assignement, it is inherited from common and import the needed utils 
 
 import { Page, expect } from '@playwright/test';
-//mport { handleCookiesAndCloseAlert } from './cookiehandler';
+import { handleCookiesAndCloseAlert } from './cookiehandler';
 import {Common} from '../utils/common';
 
 
@@ -12,31 +12,10 @@ export class WelcomePage extends Common {
 
   async open(url:string) {
     await this.page.goto(url);
-    await this.handleCookiesAndCloseAlert(this.page);
+    await handleCookiesAndCloseAlert(this.page);
     await this.page.waitForTimeout(3000);
 
   }
-
- async handleCookiesAndCloseAlert(page: Page) {
-  const frame = page.frameLocator('iframe[name="trustarc_cm"]');
-  await frame.locator('body').waitFor({ state: 'visible', timeout: 10000 }).catch(() => {
-    console.log("Cookie banner frame not found or not visible.");
-    return;
-  });
-  const acceptAllBtn = frame.getByRole("button", { name: "Accept all" }).describe(`button to accept all cookies`);
-
-  // Only run if cookie button is visible
-  if (await acceptAllBtn.isVisible({ timeout: 10000 }).catch(() => false)) {
-    await acceptAllBtn.click();
-
-    // Small alert handling
-    const closeAlertBtn = frame.getByRole("button", { name: "Close" }).describe(`button to close an alert`);
-    if (await closeAlertBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await closeAlertBtn.click();
-    }
-  }
-}
-
 
    async createYourOwn() {
     const ownyourburger= this.page.getByRole("heading", { name: "CREATE YOUR OWN" }).describe(`create your own burger welcoming`);
